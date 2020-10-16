@@ -95,8 +95,8 @@ const incomeExpense = () => {
     }
   }
 
-  income.innerHTML = "$" + incomeTot.toFixed(2);
-  expense.innerHTML = "$" + expenseTot.toFixed(2);
+  income.innerHTML = "$ " + incomeTot.toFixed(2);
+  expense.innerHTML = "$ " + expenseTot.toFixed(2);
 };
 
 incomeExpense();
@@ -109,7 +109,7 @@ const updateIncome = () => {
     // console.log(number)
     total = total + number;
   }
-  balance.innerHTML = `$${total.toFixed(2)}`;
+  balance.innerHTML = `$ ${total.toFixed(2)}`;
 };
 
 updateHistory();
