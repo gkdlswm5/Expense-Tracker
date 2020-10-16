@@ -6,6 +6,7 @@ const transactionText = document.getElementById("text");
 const transactionNum = document.getElementById("amount");
 const submit = document.querySelector(".btn");
 const form = document.getElementById("form");
+const summary = document.getElementById("summary");
 
 //Transactions will be pushed into this array
 const transactions = [
