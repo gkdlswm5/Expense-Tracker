@@ -11,18 +11,43 @@ const form = document.getElementById("form");
 const transactions = [
   {
     name: "groceries",
-    amount: "$20",
+    amount: "20",
   },
   {
     name: "Food",
-    amount: "$20",
+    amount: "20",
   },
   {
     name: "Hi",
-    amount: "$20",
+    amount: "20",
+  },
+  {
+    name: "Food",
+    amount: "20",
+  },
+  {
+    name: "Hi",
+    amount: "20",
+  },
+  {
+    name: "Food",
+    amount: "20",
+  },
+  {
+    name: "Hi",
+    amount: "20",
+  },
+  {
+    name: "Food",
+    amount: "20",
+  },
+  {
+    name: "Hi",
+    amount: "-220",
   },
 ];
 
+//Onclick event for adding new transaction
 const addTransaction = (event) => {
   event.preventDefault();
   const transName = transactionText.value;
@@ -45,16 +70,51 @@ const addTransaction = (event) => {
   updateHistory();
 };
 
+//Loops through all transactions and adds into history section
 const updateHistory = () => {
   history.innerHTML = "";
   for (const entry of transactions) {
     let element = document.createElement("div");
-    const output = `Name: ${entry.name}  Amount: ${entry.amount}`;
+    const output = `Name: ${entry.name} // Amount: $${entry.amount}`;
     element.innerHTML = output;
     history.append(element);
   }
 };
 
+//updates income / expense section
+const incomeExpense = () => {
+  let incomeTot = 0;
+  let expenseTot = 0;
+  for (x of transactions) {
+    // console.log(x.amount);
+    let number = parseFloat(x.amount);
+    if (number >= 0) {
+      incomeTot += number;
+    } else if (number < 0) {
+      expenseTot += number;
+    }
+  }
+
+  income.innerHTML = "$" + incomeTot.toFixed(2);
+  expense.innerHTML = "$" + expenseTot.toFixed(2);
+};
+
+incomeExpense();
+
+//loops through transactions and returns total
+const updateIncome = () => {
+  let total = 0;
+  for (x of transactions) {
+    let number = parseFloat(x.amount);
+    // console.log(number)
+    total = total + number;
+  }
+  balance.innerHTML = `$${total.toFixed(2)}`;
+};
+
+updateHistory();
+updateIncome();
+// console.log(total);
 // updateHistory();
 
 form.addEventListener("submit", addTransaction);
