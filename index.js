@@ -10,46 +10,46 @@ const form = document.getElementById("form");
 //Transactions will be pushed into this array
 const transactions = [
   {
-    name: "groceries",
+    name: "Test",
+    amount: "-20",
+  },
+  {
+    name: "Test",
+    amount: "-14",
+  },
+  {
+    name: "Test",
     amount: "20",
   },
   {
-    name: "Food",
-    amount: "20",
+    name: "Test",
+    amount: "-24",
   },
   {
-    name: "Hi",
-    amount: "20",
+    name: "Test",
+    amount: "5000",
   },
   {
-    name: "Food",
-    amount: "20",
+    name: "Test",
+    amount: "3400",
   },
   {
-    name: "Hi",
-    amount: "20",
+    name: "Test",
+    amount: "-600",
   },
   {
-    name: "Food",
-    amount: "20",
+    name: "Test",
+    amount: "-4220",
   },
   {
-    name: "Hi",
-    amount: "20",
-  },
-  {
-    name: "Food",
-    amount: "20",
-  },
-  {
-    name: "Hi",
-    amount: "-220",
+    name: "Test",
+    amount: "5000",
   },
 ];
 
 //Onclick event for adding new transaction
-const addTransaction = (event) => {
-  event.preventDefault();
+const addTransaction = () => {
+  // event.preventDefault();
   const transName = transactionText.value;
   const transAmt = transactionNum.value;
   //   var id = transactions.length;
@@ -66,7 +66,6 @@ const addTransaction = (event) => {
     transactionText.value = "";
     transactionNum.value = "";
   }
-  console.log(transactions);
   updateHistory();
 };
 
@@ -74,10 +73,42 @@ const addTransaction = (event) => {
 const updateHistory = () => {
   history.innerHTML = "";
   for (const entry of transactions) {
-    let element = document.createElement("div");
-    const output = `Name: ${entry.name} // Amount: $${entry.amount}`;
-    element.innerHTML = output;
-    history.append(element);
+    //positive entires
+    if (entry.amount >= 0) {
+      let element = document.createElement("li");
+      let childElement = document.createElement("span");
+      let button = document.createElement("button");
+
+      element.innerHTML = `${entry.name}`;
+      element.classList.add("plus");
+      button.innerHTML = "x";
+      button.classList.add("delete-btn");
+
+      childElement.innerHTML = "$ " + entry.amount;
+      childElement.append(button);
+
+      element.appendChild(childElement);
+
+      history.append(element);
+    }
+    //negative entires
+    else if (entry.amount < 0) {
+      let element = document.createElement("li");
+      let childElement = document.createElement("span");
+      let button = document.createElement("button");
+
+      element.innerHTML = `${entry.name}`;
+      element.classList.add("minus");
+      button.innerHTML = "x";
+      button.classList.add("delete-btn");
+
+      childElement.innerHTML = "$ " + entry.amount;
+      childElement.append(button);
+
+      element.appendChild(childElement);
+
+      history.append(element);
+    }
   }
 };
 
@@ -99,8 +130,6 @@ const incomeExpense = () => {
   expense.innerHTML = "$ " + expenseTot.toFixed(2);
 };
 
-incomeExpense();
-
 //loops through transactions and returns total
 const updateIncome = () => {
   let total = 0;
@@ -112,9 +141,16 @@ const updateIncome = () => {
   balance.innerHTML = `$ ${total.toFixed(2)}`;
 };
 
+const refresh = (e) => {
+  e.preventDefault();
+  addTransaction();
+  console.log(transactions);
+  updateIncome();
+  incomeExpense();
+};
+
 updateHistory();
 updateIncome();
-// console.log(total);
-// updateHistory();
+incomeExpense();
 
-form.addEventListener("submit", addTransaction);
+form.addEventListener("submit", refresh);

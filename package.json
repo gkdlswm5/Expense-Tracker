@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/gkdlswm5/Expense-Tracker/issues"
   },
-  "homepage": "https://github.com/gkdlswm5/Expense-Tracker#readme"
+  "homepage": "https://github.com/gkdlswm5/Expense-Tracker#readme",
+  "dependencies": {
+    "nodemon": "^2.0.5"
+  }
 }
